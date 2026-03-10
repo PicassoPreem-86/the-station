@@ -80,3 +80,20 @@ export interface Payment {
   created_at: string;
   updated_at: string;
 }
+
+export interface MaintenanceRequest {
+  id: string;
+  unit_id: string;
+  tenant_id: string;
+  property_id: string;
+  assigned_to: string | null;
+  category: string;
+  description: string;
+  priority: MaintenancePriority;
+  status: MaintenanceStatus;
+  photos: string[];
+  internal_notes: string | null;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}

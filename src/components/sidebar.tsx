@@ -9,6 +9,7 @@ import {
   Users,
   FileText,
   CreditCard,
+  Wrench,
   Menu,
   X,
   LogOut,
@@ -24,6 +25,7 @@ const navItems = [
   { href: "/dashboard/tenants", label: "Tenants", icon: Users },
   { href: "/dashboard/leases", label: "Leases", icon: FileText },
   { href: "/dashboard/payments", label: "Payments", icon: CreditCard },
+  { href: "/dashboard/maintenance", label: "Maintenance", icon: Wrench },
 ];
 
 export function Sidebar() {

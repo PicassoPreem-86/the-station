@@ -1,21 +1,31 @@
-"use client";
-
-import { useState } from "react";
-import { login } from "@/actions/auth";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase-server";
 import { Building2 } from "lucide-react";
 
-export default function LoginPage() {
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const params = await searchParams;
 
-  async function handleSubmit(formData: FormData) {
-    setLoading(true);
-    setError(null);
-    const result = await login(formData);
-    if (result?.error) {
-      setError(result.error);
-      setLoading(false);
+  async function loginAction(formData: FormData) {
+    "use server";
+
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const supabase = await createClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      redirect(`/login?error=${encodeURIComponent(error.message)}`);
     }
+
+    redirect("/dashboard");
   }
 
   return (
@@ -29,10 +39,10 @@ export default function LoginPage() {
           <p className="text-sm text-zinc-500">Sign in to the management dashboard</p>
         </div>
 
-        <form action={handleSubmit} className="space-y-4">
-          {error && (
+        <form action={loginAction} className="space-y-4">
+          {params.error && (
             <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">
-              {error}
+              {params.error}
             </div>
           )}
 
@@ -66,10 +76,9 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            disabled={loading}
-            className="flex h-10 w-full items-center justify-center rounded-lg bg-zinc-900 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+            className="flex h-10 w-full items-center justify-center rounded-lg bg-zinc-900 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
-            {loading ? "Signing in..." : "Sign in"}
+            Sign in
           </button>
         </form>
       </div>

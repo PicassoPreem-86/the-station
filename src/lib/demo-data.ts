@@ -1,4 +1,4 @@
-import type { Property, Unit, Tenant, Lease, Payment } from "@/types";
+import type { Property, Unit, Tenant, Lease, Payment, MaintenanceRequest } from "@/types";
 
 export const demoProperty: Property = {
   id: "prop-001",
@@ -49,4 +49,12 @@ export const demoPayments: Payment[] = [
   { id: "pay-005", lease_id: "lease-005", tenant_id: "ten-005", amount: 4500, status: "paid", method: "ach", payment_date: "2026-03-01", notes: null, created_at: "2026-03-01T00:00:00Z", updated_at: "2026-03-01T00:00:00Z" },
   { id: "pay-006", lease_id: "lease-001", tenant_id: "ten-001", amount: 1200, status: "paid", method: "ach", payment_date: "2026-02-01", notes: null, created_at: "2026-02-01T00:00:00Z", updated_at: "2026-02-01T00:00:00Z" },
   { id: "pay-007", lease_id: "lease-002", tenant_id: "ten-002", amount: 800, status: "partial", method: "card", payment_date: "2026-02-01", notes: "Partial payment", created_at: "2026-02-01T00:00:00Z", updated_at: "2026-02-01T00:00:00Z" },
+];
+
+export const demoMaintenanceRequests: MaintenanceRequest[] = [
+  { id: "maint-001", unit_id: "unit-001", tenant_id: "ten-001", property_id: "prop-001", assigned_to: null, category: "Plumbing", description: "Kitchen faucet leaking under the sink", priority: "high", status: "submitted", photos: [], internal_notes: null, completed_at: null, created_at: "2026-03-08T10:00:00Z", updated_at: "2026-03-08T10:00:00Z" },
+  { id: "maint-002", unit_id: "unit-002", tenant_id: "ten-002", property_id: "prop-001", assigned_to: null, category: "HVAC", description: "AC unit not cooling properly, blowing warm air", priority: "medium", status: "in_progress", photos: [], internal_notes: "Technician scheduled for Tuesday", completed_at: null, created_at: "2026-03-06T14:30:00Z", updated_at: "2026-03-07T09:00:00Z" },
+  { id: "maint-003", unit_id: "unit-004", tenant_id: "ten-003", property_id: "prop-001", assigned_to: null, category: "Electrical", description: "Bathroom light fixture flickering intermittently", priority: "low", status: "scheduled", photos: [], internal_notes: null, completed_at: null, created_at: "2026-03-05T11:15:00Z", updated_at: "2026-03-06T08:00:00Z" },
+  { id: "maint-004", unit_id: "unit-005", tenant_id: "ten-004", property_id: "prop-001", assigned_to: null, category: "Appliance", description: "Dishwasher not draining after cycle completes", priority: "medium", status: "completed", photos: [], internal_notes: "Replaced drain pump", completed_at: "2026-03-04T16:00:00Z", created_at: "2026-03-02T09:00:00Z", updated_at: "2026-03-04T16:00:00Z" },
+  { id: "maint-005", unit_id: "unit-008", tenant_id: "ten-005", property_id: "prop-001", assigned_to: null, category: "Locks & Keys", description: "Front door deadbolt is sticking, hard to lock", priority: "emergency", status: "submitted", photos: [], internal_notes: null, completed_at: null, created_at: "2026-03-09T22:00:00Z", updated_at: "2026-03-09T22:00:00Z" },
 ];

@@ -44,6 +44,34 @@ export const PAYMENT_METHOD_LABELS: Record<string, string> = {
   card: "Card",
 };
 
+export const MAINTENANCE_STATUS_LABELS: Record<string, string> = {
+  submitted: "Submitted",
+  in_progress: "In Progress",
+  scheduled: "Scheduled",
+  completed: "Completed",
+  closed: "Closed",
+};
+
+export const MAINTENANCE_PRIORITY_LABELS: Record<string, string> = {
+  emergency: "Emergency",
+  high: "High",
+  medium: "Medium",
+  low: "Low",
+};
+
+export const MAINTENANCE_CATEGORIES = [
+  "Plumbing",
+  "Electrical",
+  "HVAC",
+  "Appliance",
+  "Structural",
+  "Pest Control",
+  "Locks & Keys",
+  "Painting",
+  "Flooring",
+  "General",
+];
+
 export function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
 }
