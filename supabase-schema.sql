@@ -244,7 +244,7 @@ create policy "Staff access announcements" on announcements for all using (
 );
 
 create policy "Staff access staff" on staff_members for all using (
-  exists (select 1 from staff_members s where s.property_id = staff_members.property_id and s.user_id = auth.uid())
+  user_id = auth.uid()
 );
 
 -- ============================================
