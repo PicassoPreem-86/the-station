@@ -33,21 +33,34 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user && request.nextUrl.pathname.startsWith("/dashboard")) {
+  const pathname = request.nextUrl.pathname;
+
+  // Staff dashboard protection
+  if (!user && pathname.startsWith("/dashboard")) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  if (user && request.nextUrl.pathname === "/login") {
+  if (user && pathname === "/login") {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
+  // Resident portal protection
+  if (!user && pathname.startsWith("/resident") && pathname !== "/resident/login") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/resident/login";
+    return NextResponse.redirect(url);
+  }
+
+  // Don't redirect authenticated users from /resident/login in middleware
+  // The login page itself will check if user is a tenant and redirect accordingly
+
   return supabaseResponse;
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login"],
+  matcher: ["/dashboard/:path*", "/login", "/resident/:path*"],
 };

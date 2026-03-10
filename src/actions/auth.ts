@@ -23,3 +23,9 @@ export async function logout() {
   await supabase.auth.signOut();
   redirect("/login");
 }
+
+export async function residentLogout() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/resident/login");
+}

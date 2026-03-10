@@ -45,6 +45,7 @@ export interface Tenant {
   phone: string;
   status: TenantStatus;
   unit_id: string | null;
+  property_id: string;
   emergency_contact_name: string | null;
   emergency_contact_phone: string | null;
   move_in_date: string | null;
